@@ -5,7 +5,7 @@
 Τεχνολογιία: jquery & jquery-ui
 
 # Βίντεο
-![quiz-engine-screenshot](img/alx_tonoi.mp4) 
+[Βίντεο στο youtube](https://youtu.be/78Sb7pgA5E8)
 
 # Εγκατάσταση
 Κάνεις clone αυτό το repository και εγκαθιστάς τα dependencies από το [yarn](https://yarnpkg.com/en/)
