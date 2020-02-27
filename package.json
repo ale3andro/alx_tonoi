@@ -1,0 +1,12 @@
+{
+  "name": "alx_tonoi",
+  "version": "1.0.0",
+  "main": "index.html",
+  "author": "ale3andro",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "jquery-ui-dist": "^1.12.1"
+  }
+}
