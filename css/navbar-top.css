@@ -6,3 +6,7 @@ body {
 .letter {
   cursor: pointer;
 }
+
+#alx_word {
+  font-weight: bold;
+}
