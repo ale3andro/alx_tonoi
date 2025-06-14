@@ -65,18 +65,48 @@ function next_round(word) {
 }
 
 $( document ).ready(function() {
-    var game_id = getUrlParams('id');
-    if ( (game_id.length>0) && (game_id!='not available') ) {
-        var jqxhr = $.getJSON("activities/" + game_id + ".json", function(data) {
+
+    $(".nodrag").on("dragstart", function() {
+    return false; // Prevents dragging
+  });
+
+  if (!('id' in getUrlParams())) {
+    $.ajax(
+    {   url: "activities/all_activities",
+        type: "GET",
+        dataType: "text",
+        success: function(result) {
+            $('#alx_title').html('<h1>Διαθέσιμες δραστηριότητες<h1><br />');
+            console.log(result);
+            var alldata = result.split('\n');
+            for (var i=0; i<alldata.length; i+=2) {
+                activity_id = alldata[i].split(".")[0];
+                if (alldata[i]!='') {
+                    activity_title = alldata[i+1].substring(1, alldata[i+1].length-1);
+                    let url = activity_title + ' | <a href="?id=' + activity_id + '">εδώ</a>.<br />';
+                    $('#alx_title').html( $('#alx_title').html() + url);
+                    console.log(url);
+                }
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log('FaIlUrE');
+            console.log(xhr, status, error);
+        } 
+    });
+    return; 
+  } else {
+    $.ajax(
+    {   
+        url: "activities/" + getUrlParams('id') + ".json",
+        success: function(data) {
             $('#alx_title').html(data['title']);
             words=data['words'].split('|');
             next_round(words[counter]);
-        })
-        .fail(function() {
-            console.log('failed to load the game');
+        },
+        error: function(xhr, status, error) {
+            window.location.href = "http://sxoleio.pw/alx_code/alx_tonoi/";
+        } 
         });
-    }
-    else {
-        alert("Δεν ορίστηκε το id της δραστηριότητας");
-    }
+  }    
 });
